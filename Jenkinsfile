@@ -31,6 +31,13 @@ pipeline {
                 bat 'docker build -t aws-devops-cicd-platform:latest .'
             }
         }
+        stage('AWS Check') {
+            steps {
+                echo 'Checking AWS CLI access...'
+                bat 'aws --version'
+                bat 'aws sts get-caller-identity'
+            }
+        }
 
     }
 
