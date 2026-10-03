@@ -38,7 +38,18 @@ pipeline {
                 bat '"C:\\Program Files\\Amazon\\AWSCLIV2\\aws.exe" sts get-caller-identity'
             }
         }
+        stage('ECR Push') {
+            steps {
+                echo 'Logging in to AWS ECR...'
+                bat '"C:\\Program Files\\Amazon\\AWSCLIV2\\aws.exe" ecr get-login-password --region ap-southeast-2 | docker login --username AWS --password-stdin 351473831892.dkr.ecr.ap-southeast-2.amazonaws.com'
 
+                echo 'Tagging Docker image for ECR...'
+                bat 'docker tag aws-devops-cicd-platform:latest 351473831892.dkr.ecr.ap-southeast-2.amazonaws.com/aws-devops-cicd-platform:latest'
+
+                echo 'Pushing Docker image to ECR...'
+                bat 'docker push 351473831892.dkr.ecr.ap-southeast-2.amazonaws.com/aws-devops-cicd-platform:latest'
+            }
+        }
     }
 
     post {
