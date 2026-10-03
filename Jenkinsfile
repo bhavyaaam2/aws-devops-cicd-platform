@@ -34,8 +34,8 @@ pipeline {
         stage('AWS Check') {
             steps {
                 echo 'Checking AWS CLI access...'
-                bat 'aws --version'
-                bat 'aws sts get-caller-identity'
+                bat '"C:\\Program Files\\Amazon\\AWSCLIV2\\aws.exe" --version'
+                bat '"C:\\Program Files\\Amazon\\AWSCLIV2\\aws.exe" sts get-caller-identity'
             }
         }
 
