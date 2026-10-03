@@ -25,6 +25,13 @@ pipeline {
             }
         }
 
+        stage('Docker Build') {
+            steps {
+                echo 'Building Docker image...'
+                bat 'docker build -t aws-devops-cicd-platform:latest .'
+            }
+        }
+
     }
 
     post {
