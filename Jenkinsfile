@@ -50,6 +50,13 @@ pipeline {
                 bat 'docker push 351473831892.dkr.ecr.ap-southeast-2.amazonaws.com/aws-devops-cicd-platform:latest'
             }
         }
+        stage('ECS Deploy') {
+            steps {
+                echo 'Deploying application to ECS...'
+
+                bat '"C:\\Program Files\\Amazon\\AWSCLIV2\\aws.exe" ecs update-service --cluster aws-devops-cicd-cluster --service aws-devops-cicd-service --force-new-deployment --region ap-southeast-2'
+            }
+        }
     }
 
     post {
